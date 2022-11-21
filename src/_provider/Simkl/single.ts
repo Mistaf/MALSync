@@ -152,6 +152,17 @@ export class Single extends SingleAbstract {
     }
   }
 
+  _setStartDate(startDate: Date | null): void {
+  }
+  _getStartDate(): Date | null {
+    return null;
+  }
+  _setEndDate(endDate: Date | null): void {
+  }
+  _getEndDate(): Date | null {
+    return null;
+  }
+
   async _update() {
     let de;
     if (Number.isNaN(this.ids.mal)) {

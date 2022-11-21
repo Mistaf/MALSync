@@ -125,6 +125,22 @@ export class Single extends SingleAbstract {
   _getRating() {
     return Promise.resolve(this.animeInfo.averageScore);
   }
+  
+  _getStartDate() {
+    return this.animeInfo.mediaListEntry.startDate;
+  }
+
+  _setStartDate(date) {
+    this.animeInfo.mediaListEntry.startDate = date;
+  }
+
+  _getEndDate() {
+    return this.animeInfo.mediaListEntry.endDate;
+  }
+
+  _setEndDate(date) {
+    this.animeInfo.mediaListEntry.endDate = date;
+  }
 
   async _update() {
     let selectId = this.ids.mal;
@@ -207,14 +223,16 @@ export class Single extends SingleAbstract {
 
   async _sync() {
     let query = `
-      mutation ($mediaId: Int, $status: MediaListStatus, $progress: Int, $scoreRaw: Int, $notes: String) {
-        SaveMediaListEntry (mediaId: $mediaId, status: $status, progress: $progress, scoreRaw: $scoreRaw, notes: $notes) {
+      mutation ($mediaId: Int, $status: MediaListStatus, $progress: Int, $scoreRaw: Int, $notes: String, $startedAt: FuzzyDateInput, $completedAt: FuzzyDateInput) {
+        SaveMediaListEntry (mediaId: $mediaId, status: $status, progress: $progress, scoreRaw: $scoreRaw, notes: $notes, startedAt: $startedAt, completedAt: $completedAt) {
           id
           status
           progress
         }
       }
     `;
+    const startDate = new Date(this.animeInfo.mediaListEntry?.startDate);
+    const endDate = new Date(this.animeInfo.mediaListEntry?.endDate);
     const variables = {
       mediaId: this.ids.ani,
       status: this.animeInfo.mediaListEntry.status,
@@ -222,6 +240,16 @@ export class Single extends SingleAbstract {
       scoreRaw: this.animeInfo.mediaListEntry.score,
       notes: this.animeInfo.mediaListEntry.notes,
       volumes: null,
+      startedAt: {
+        year: startDate.toString() === 'Invalid Date' ? null : startDate.getFullYear(),
+        month: startDate.toString() === 'Invalid Date' ? null : startDate.getMonth() + 1,
+        day: startDate.toString() === 'Invalid Date' ? null : startDate.getDate(),
+      },
+      completedAt: {
+        year: endDate.toString() === 'Invalid Date' ? null : endDate.getFullYear(),
+        month: endDate.toString() === 'Invalid Date' ? null : endDate.getMonth() + 1,
+        day: endDate.toString() === 'Invalid Date' ? null : endDate.getDate(),
+      },
     };
 
     if (this.type === 'manga') {

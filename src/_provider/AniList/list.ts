@@ -121,6 +121,16 @@ export class UserList extends ListAbstract {
           progress
           progressVolumes
           notes
+          startedAt {
+            year
+            month
+            day
+          }
+          completedAt {
+            year
+            month
+            day
+          }
           media {
             siteUrl
             id
@@ -195,6 +205,8 @@ export class UserList extends ListAbstract {
       const el = data[i];
       let tempData;
       if (listType === 'anime') {
+        const startDate = new Date(`${el.startedAt?.year}-${el.startedAt?.month?.toString()?.padStart(2,'0')}-${el.startedAt?.day?.toString()?.padStart(2,'0')}`);
+        const endDate = new Date(`${el.completedAt?.year}-${el.completedAt?.month?.toString()?.padStart(2,'0')}-${el.completedAt?.day?.toString()?.padStart(2,'0')}`);
         tempData = await this.fn({
           uid: el.media.id,
           malId: el.media.idMal,
@@ -212,6 +224,8 @@ export class UserList extends ListAbstract {
           imageBanner: el.media.bannerImage,
           tags: el.notes,
           airingState: el.anime_airing_status,
+          startDate: startDate.toString() !== 'Invalid Date' ? startDate.toISOString()?.slice(0, 10) : undefined,
+          endDate: endDate.toString() !== 'Invalid Date' ? endDate.toISOString()?.slice(0, 10) : undefined,
         });
       } else {
         tempData = await this.fn({

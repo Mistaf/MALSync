@@ -139,6 +139,17 @@ export class Single extends SingleAbstract {
     return Promise.resolve('Local');
   }
 
+  _setStartDate(startDate: Date | null): void {
+  }
+  _getStartDate(): Date | null {
+    return null;
+  }
+  _setEndDate(endDate: Date | null): void {
+  }
+  _getEndDate(): Date | null {
+    return null;
+  }
+
   async _update() {
     this._authenticated = true;
 

@@ -571,6 +571,8 @@ export abstract class SingleAbstract {
       status: this.getStatus(),
       score: this.getScore(),
       absoluteScore: this.getAbsoluteScore(),
+      startDate: this.getStartDate(),
+      endDate: this.getEndDate(),
     };
   }
 
@@ -764,5 +766,37 @@ export abstract class SingleAbstract {
 
   errorMessage(error) {
     return _errorMessage(error, this.authenticationUrl);
+  }
+  
+  abstract _setStartDate(startDate: Date): void;
+
+  public setStartDate(startDate: Date | null): SingleAbstract {
+    if (!startDate) return this;
+    this._setStartDate(startDate);
+    return this;
+  }
+
+  abstract _getStartDate(): Date | null;
+
+  public getStartDate(): Date | null {
+    const startDate = this._getStartDate();
+    if (!startDate) return null;
+    return startDate;
+  }
+
+  abstract _setEndDate(endDate: Date): void;
+
+  public setEndDate(endDate: Date | null): SingleAbstract {
+    if (!endDate) return this;
+    this._setEndDate(endDate);
+    return this;
+  }
+
+  abstract _getEndDate(): Date | null;
+
+  public getEndDate(): Date | null {
+    const endDate = this._getEndDate();
+    if (!endDate) return null;
+    return endDate;
   }
 }

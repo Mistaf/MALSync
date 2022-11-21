@@ -131,6 +131,8 @@ export class UserList extends ListAbstract {
             imageLarge: el.node.main_picture?.large || el.node.main_picture?.medium || '',
             tags: el.list_status.tags.length ? el.list_status.tags.join(',') : '',
             airingState: el.anime_airing_status,
+            startDate: el.list_status.start_date,
+            endDate: el.list_status.finish_date,
           }),
         );
       } else {

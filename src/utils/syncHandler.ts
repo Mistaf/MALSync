@@ -86,6 +86,14 @@ export function changeCheck(item, mode) {
         item.diff = true;
         slave.diff.score = item.master.score;
       }
+      if (slave.startDate !== item.master.startDate) {
+        item.diff = true;
+        slave.diff.startDate = item.master.startDate;
+      }
+      if (slave.endDate !== item.master.endDate) {
+        item.diff = true;
+        slave.diff.endDate = item.master.endDate;
+      }
     }
   }
 }
@@ -186,6 +194,8 @@ export function syncItem(slave, pageType) {
           singleClass.setEpisode(slave.diff.watchedEp);
         if (typeof slave.diff.status !== 'undefined') singleClass.setStatus(slave.diff.status);
         if (typeof slave.diff.score !== 'undefined') singleClass.setScore(slave.diff.score);
+        if (typeof slave.diff.startDate !== 'undefined') singleClass.setStartDate(slave.diff.startDate);
+        if (typeof slave.diff.endDate !== 'undefined') singleClass.setEndDate(slave.diff.endDate);
         return singleClass.sync();
       })
       .then(() => {

@@ -178,6 +178,19 @@ export class Single extends SingleAbstract {
     return Promise.resolve(this.animeInfo.mean);
   }
 
+  _setStartDate(startDate: Date | null): void {
+    this.animeInfo.my_list_status.start_date = startDate;
+  }
+  _getStartDate(): Date {
+    return this.animeInfo.my_list_status.start_date;
+  }
+  _setEndDate(endDate: Date | null): void {
+    this.animeInfo.my_list_status.end_date = endDate;
+  }
+  _getEndDate(): Date {
+    return this.animeInfo.my_list_status.end_date;
+  }
+
   async _update() {
     return this.apiCall({
       type: 'GET',

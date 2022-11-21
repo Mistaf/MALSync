@@ -109,6 +109,8 @@
                 <div>EP: {{ item.master.watchedEp }}</div>
                 <div>Status: {{ item.master.status }}</div>
                 <div>Score: {{ item.master.score }}</div>
+                <div>Start date: {{ item.master.startDate }}</div>
+                <div>End date: {{ item.master.endDate }}</div>
               </FormButton>
               <FormButton
                 v-for="slave in item.slaves"
@@ -141,6 +143,18 @@
                     → {{ slave.diff.score }}
                   </span>
                 </div>
+                <div>
+                  Start date: {{ slave.startDate }}
+                  <span v-if="slave.diff && slave.diff.startDate" class="highlight">
+                    → {{ slave.diff.startDate }}
+                  </span>
+                </div>
+                <div>
+                  End date: {{ slave.endDate }}
+                  <span v-if="slave.diff && slave.diff.endDate" class="highlight">
+                    → {{ slave.diff.endDate }}
+                  </span>
+                </div>
               </FormButton>
             </div>
           </Card>
@@ -164,6 +178,8 @@
               <div>EP: {{ item.watchedEp }}</div>
               <div>Status: {{ item.status }}</div>
               <div>Score: {{ item.score }}</div>
+              <div>Start date: {{ item.StartDate }}</div>
+              <div>End date: {{ item.endDate }}</div>
               <FormButton v-if="item.error" :animation="false" color="secondary" padding="mini">
                 {{ item.error }}
               </FormButton>

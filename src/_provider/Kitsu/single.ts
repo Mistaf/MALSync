@@ -162,6 +162,17 @@ export class Single extends SingleAbstract {
     return Promise.resolve(`${this.animeI().attributes.averageRating}%`);
   }
 
+  _setStartDate(startDate: Date | null): void {
+  }
+  _getStartDate(): Date | null {
+    return null;
+  }
+  _setEndDate(endDate: Date | null): void {
+  }
+  _getEndDate(): Date | null {
+    return null;
+  }
+
   async _update() {
     if (Number.isNaN(this.ids.mal)) {
       /* eslint-disable-next-line no-var */
