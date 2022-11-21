@@ -86,13 +86,10 @@ export function changeCheck(item, mode) {
         item.diff = true;
         slave.diff.score = item.master.score;
       }
-      if (slave.startDate !== item.master.startDate) {
+      if (slave.startDate !== item.master.startDate || slave.endDate !== item.master.endDate) {
         item.diff = true;
-        slave.diff.startDate = item.master.startDate;
-      }
-      if (slave.endDate !== item.master.endDate) {
-        item.diff = true;
-        slave.diff.endDate = item.master.endDate;
+        slave.diff.startDate = item.master?.startDate;
+        slave.diff.endDate = item.master?.endDate;
       }
     }
   }
