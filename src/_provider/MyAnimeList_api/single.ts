@@ -185,10 +185,10 @@ export class Single extends SingleAbstract {
     return this.animeInfo.my_list_status.start_date;
   }
   _setEndDate(endDate: Date | null): void {
-    this.animeInfo.my_list_status.end_date = endDate;
+    this.animeInfo.my_list_status.finish_date = endDate;
   }
   _getEndDate(): Date {
-    return this.animeInfo.my_list_status.end_date;
+    return this.animeInfo.my_list_status.finish_date;
   }
 
   async _update() {
